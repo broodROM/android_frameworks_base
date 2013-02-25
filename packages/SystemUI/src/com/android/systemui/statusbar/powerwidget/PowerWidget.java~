@@ -69,7 +69,7 @@ public class PowerWidget extends FrameLayout {
                                         1.0f                                 // weight = 1
                                         );
 
-    private static final int LAYOUT_SCROLL_BUTTON_THRESHOLD = 5;
+    private static final int LAYOUT_SCROLL_BUTTON_THRESHOLD = 6;
 
     // this is a list of all possible buttons and their corresponding classes
     private static final HashMap<String, Class<? extends PowerButton>> sPossibleButtons =
