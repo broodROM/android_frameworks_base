@@ -41,8 +41,8 @@ public class BatteryController extends BroadcastReceiver {
     private ArrayList<ImageView> mIconViews = new ArrayList<ImageView>();
     private ArrayList<TextView> mLabelViews = new ArrayList<TextView>();
 
-    private static final int BATTERY_STYLE_NORMAL         = 0;
-    private static final int BATTERY_STYLE_PERCENT        = 1;
+    private static final int BATTERY_STYLE_PERCENT        = 0;
+    private static final int BATTERY_STYLE_NORMAL         = 1;
     /***
      * BATTERY_STYLE_CIRCLE* cannot be handled in this controller, since we cannot get views from
      * statusbar here. Yet it is listed for completion and not to confuse at future updates
