@@ -213,16 +213,16 @@ public class UsbStorageActivity extends Activity
     public Dialog onCreateDialog(int id, Bundle args) {
         switch (id) {
         case DLG_CONFIRM_KILL_STORAGE_USERS:
-            return new AlertDialog.Builder(this)
-                    .setTitle(R.string.dlg_confirm_kill_storage_users_title)
-                    .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            switchUsbMassStorage(true);
-                        }})
-                    .setNegativeButton(R.string.cancel, null)
-                    .setMessage(R.string.dlg_confirm_kill_storage_users_text)
-                    .setOnCancelListener(this)
-                    .create();
+//          return new AlertDialog.Builder(this)
+//            .setTitle(R.string.dlg_confirm_kill_storage_users_title)
+//                  .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
+//                      public void onClick(DialogInterface dialog, int which) {
+                           switchUsbMassStorage(true);
+//                      }})
+//                  .setNegativeButton(R.string.cancel, null)
+//                  .setMessage(R.string.dlg_confirm_kill_storage_users_text)
+//                  .setOnCancelListener(this)
+//                  .create();
         case DLG_ERROR_SHARING:
             return new AlertDialog.Builder(this)
                     .setTitle(R.string.dlg_error_title)
