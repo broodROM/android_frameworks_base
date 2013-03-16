@@ -55,6 +55,8 @@ public class PowerWidget extends FrameLayout {
                              + BUTTON_DELIMITER + PowerButton.BUTTON_BLUETOOTH
                              + BUTTON_DELIMITER + PowerButton.BUTTON_GPS
                              + BUTTON_DELIMITER + PowerButton.BUTTON_SOUND
+                             + BUTTON_DELIMITER + PowerButton.BUTTON_BRIGHTNESS
+                             + BUTTON_DELIMITER + PowerButton.BUTTON_SYNC
                              + BUTTON_DELIMITER + PowerButton.BUTTON_AUTOROTATE;
 			     
 
