@@ -57,7 +57,11 @@ public class PowerWidget extends FrameLayout {
                              + BUTTON_DELIMITER + PowerButton.BUTTON_SOUND
                              + BUTTON_DELIMITER + PowerButton.BUTTON_BRIGHTNESS
                              + BUTTON_DELIMITER + PowerButton.BUTTON_SYNC
-                             + BUTTON_DELIMITER + PowerButton.BUTTON_AUTOROTATE;
+                             + BUTTON_DELIMITER + PowerButton.BUTTON_AUTOROTATE
+                             + BUTTON_DELIMITER + PowerButton.BUTTON_AIRPLANE
+                             + BUTTON_DELIMITER + PowerButton.BUTTON_MEDIA_PREVIOUS
+                             + BUTTON_DELIMITER + PowerButton.BUTTON_MEDIA_PLAY_PAUSE
+                             + BUTTON_DELIMITER + PowerButton.BUTTON_MEDIA_NEXT;
 			     
 
     private static final FrameLayout.LayoutParams WIDGET_LAYOUT_PARAMS = new FrameLayout.LayoutParams(

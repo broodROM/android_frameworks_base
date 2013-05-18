@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
  * Copyright (C) 2010-2012 CyanogenMod Project
+ * Copyright (C) 2013 broodplank.net
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,6 +56,8 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.os.IPowerManager;
+import android.os.PowerManager;
 
 import com.android.internal.app.ThemeUtils;
 
@@ -313,59 +316,23 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
             });
 
 
-   
 
-       
-     
-        // next: expanded desktop toggle
-        // only shown if enabled, disabled by default
-        if(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 0) == 1){
-            mItems.add(mExpandDesktopModeOn);
-        }
+      mItems.add(
+            new SinglePressAction(R.drawable.ic_lock_rebootfast, R.string.reboot_fast) {
+                public void onPress() {
+                    fastReboot();
+                }
 
-        // next: airplane mode
-        if (Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.POWER_MENU_AIRPLANE_ENABLED, 1) == 1) {
-            mItems.add(mAirplaneModeOn);
-        }
+                public boolean showDuringKeyguard() {
+                    return true;
+                }
 
-        // next: users
-        List<UserInfo> users = mContext.getPackageManager().getUsers();
-        if (users.size() > 1) {
-            UserInfo currentUser;
-            try {
-                currentUser = ActivityManagerNative.getDefault().getCurrentUser();
-            } catch (RemoteException re) {
-                currentUser = null;
-            }
-            for (final UserInfo user : users) {
-                boolean isCurrentUser = currentUser == null
-                        ? user.id == 0 : (currentUser.id == user.id);
-                SinglePressAction switchToUser = new SinglePressAction(
-                        com.android.internal.R.drawable.ic_menu_cc,
-                        (user.name != null ? user.name : "Primary")
-                        + (isCurrentUser ? " \u2714" : "")) {
-                    public void onPress() {
-                        try {
-                            ActivityManagerNative.getDefault().switchUser(user.id);
-                            getWindowManager().lockNow();
-                        } catch (RemoteException re) {
-                            Log.e(TAG, "Couldn't switch user " + re);
-                        }
-                    }
+                public boolean showBeforeProvisioning() {
+                    return true;
+                }
+            });
 
-                    public boolean showDuringKeyguard() {
-                        return true;
-                    }
-
-                    public boolean showBeforeProvisioning() {
-                        return false;
-                    }
-                };
-                mItems.add(switchToUser);
-            }
-        }
+      
 
         // last: silent mode
         if ((Settings.System.getInt(mContext.getContentResolver(),
@@ -482,6 +449,17 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
             }
         }
     }
+
+    private void fastReboot() {
+       try {
+                    IBinder b = ServiceManager.getService(Context.POWER_SERVICE);
+                    IPowerManager pm = IPowerManager.Stub.asInterface(b);
+                    pm.crash("Crashed by Hot Reboot");
+                } catch (RemoteException e) {
+                    Log.e(TAG, "Hot reboot failed, will attempt normal reboot instead", e);
+                }
+     }
+
     
     private void prepareDialog() {
         refreshSilentMode();
