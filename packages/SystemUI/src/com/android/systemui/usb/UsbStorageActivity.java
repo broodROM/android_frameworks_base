@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2007 Google Inc.
+ * Copyright (C) 2013 broodplank.net
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -224,12 +225,18 @@ public class UsbStorageActivity extends Activity
 //                  .setOnCancelListener(this)
 //                  .create();
         case DLG_ERROR_SHARING:
-            return new AlertDialog.Builder(this)
-                    .setTitle(R.string.dlg_error_title)
-                    .setNeutralButton(R.string.dlg_ok, null)
-                    .setMessage(R.string.usb_storage_error_message)
-                    .setOnCancelListener(this)
-                    .create();
+//          return new AlertDialog.Builder(this)
+//                  .setTitle(R.string.dlg_error_title)
+//                  .setNeutralButton(R.string.dlg_ok, null)
+//                  .setMessage(R.string.usb_storage_error_message)
+//                  .setOnCancelListener(this)
+//                  .create();
+             // Call sleep to prevent freezing on loading
+             try {
+        	    Thread.sleep(1000);
+	     } catch (InterruptedException f) {
+		    f.printStackTrace();
+	     }
         }
         return null;
     }
@@ -320,7 +327,7 @@ public class UsbStorageActivity extends Activity
             checkStorageUsers();
         } else if (v == mUnmountButton) {
             if (localLOGV) Log.i(TAG, "Disabling UMS");
-            switchUsbMassStorage(false);
+           switchUsbMassStorage(false);
         }
     }
 
